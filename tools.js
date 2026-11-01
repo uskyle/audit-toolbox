@@ -4,6 +4,7 @@
  * 新增工具：复制下面任意一个对象，改 id 和内容即可。
  * To add a tool: copy one object below, change the id and fields.
  *
+ * file               exe 的文件名（用于校验命令里显示）
  * downloads.primary  主线路（GitHub Releases 的文件链接）
  * downloads.mirror   备用线路（Cloudflare R2 / 网盘直链），没有就留空 ""
  * sha256             exe 的 SHA256 校验值，留空则页面显示"待发布时填写"
@@ -25,15 +26,16 @@ window.TOOLS = [
       zh: ["下载并解压（如有压缩包），双击运行。", "选择要压缩的 PDF 文件。", "选择压缩强度，点击开始。", "在原文件旁边得到压缩后的新文件，原文件不会被改动。"],
       en: ["Download and double-click to run.", "Choose the PDF file(s) to compress.", "Pick a compression level and start.", "The compressed copy is saved next to the original; the original is never modified."]
     },
-    version: "0.0.0",
+    file: "PDF-Compressor.exe",
+    version: "1.0.0",
     updated: "2026-11-01",
-    size: "—",
+    size: "32.2 MB",
     platform: "Windows 10/11",
     offline: true,
-    downloads: { primary: "", mirror: "" },
-    sha256: "",
+    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/v1.0.0/PDF-Compressor.exe", mirror: "" },
+    sha256: "b544e80fc99947026b255d43297c8010a7fb0d9ccedb0f9e9c11328299a4648d",
     changelog: [
-      { version: "0.0.0", date: "2026-11-01", zh: "占位，尚未发布。", en: "Placeholder, not released yet." }
+      { version: "1.0.0", date: "2026-11-01", zh: "首次发布。", en: "Initial release." }
     ]
   },
   {

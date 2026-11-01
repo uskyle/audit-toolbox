@@ -47,12 +47,13 @@
     return !!(tool.downloads && (tool.downloads.primary || tool.downloads.mirror));
   }
 
-  // 语言切换链接：保留当前页面和查询参数
+  // 语言切换链接：保留当前页面和查询参数（文件名形如 zh.html / zh-tool.html / zh-about.html）
   var sw = document.getElementById("lang-switch");
   if (sw) {
-    var other = lang === "zh" ? "../en/" : "../zh/";
-    var file = location.pathname.split("/").pop() || "index.html";
-    sw.setAttribute("href", other + file + location.search);
+    var other = lang === "zh" ? "en" : "zh";
+    var file = location.pathname.split("/").pop() || (lang + ".html");
+    if (file.indexOf(lang) !== 0) file = lang + ".html";
+    sw.setAttribute("href", file.replace(/^(zh|en)/, other) + location.search);
   }
 
   // ---------- 列表页 ----------
@@ -72,7 +73,7 @@
         el("p", { text: tool.summary[lang] }),
         badges,
         meta,
-        el("a", { class: "btn" + (released(tool) ? "" : " secondary"), href: "tool.html?id=" + encodeURIComponent(tool.id),
+        el("a", { class: "btn" + (released(tool) ? "" : " secondary"), href: lang + "-tool.html?id=" + encodeURIComponent(tool.id),
           text: released(tool) ? T.details : T.soon + " · " + T.details })
       ]);
       listBox.appendChild(card);
@@ -85,7 +86,7 @@
     var id = new URLSearchParams(location.search).get("id");
     var tool = tools.filter(function (t) { return t.id === id; })[0];
 
-    detailBox.appendChild(el("a", { href: "index.html", text: T.back }));
+    detailBox.appendChild(el("a", { href: lang + ".html", text: T.back }));
 
     if (!tool) {
       detailBox.appendChild(el("p", { class: "empty", text: T.notFound }));
@@ -122,7 +123,7 @@
 
       // 校验
       detailBox.appendChild(el("h2", { text: T.verify }));
-      var fileName = tool.id + ".exe";
+      var fileName = tool.file || (tool.id + ".exe");
       detailBox.appendChild(el("div", { class: "panel" }, [
         el("p", { text: T.verifyHint }),
         el("pre", { text: "certutil -hashfile " + fileName + " SHA256" }),
