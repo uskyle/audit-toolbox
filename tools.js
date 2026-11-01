@@ -53,15 +53,16 @@ window.TOOLS = [
       zh: ["下载并双击运行。", "导入银行流水和账面明细（Excel / CSV）。", "设置匹配条件，点击核对。", "查看差异清单，可导出为 Excel。"],
       en: ["Download and double-click to run.", "Import the bank statement and ledger detail (Excel / CSV).", "Set matching rules and run the check.", "Review the differences and export them to Excel."]
     },
-    version: "0.0.0",
+    file: "Bank-Statement-Checker.exe",
+    version: "1.0.0",
     updated: "2026-11-01",
-    size: "—",
+    size: "36.4 MB",
     platform: "Windows 10/11",
     offline: true,
-    downloads: { primary: "", mirror: "" },
-    sha256: "",
+    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/Bank-check-v1.0.0/Bank-Statement-Checker.exe", mirror: "" },
+    sha256: "e3d6fa82684cb6941b4ee31b0001adb84c29447c075a7ba911de37121453abfe",
     changelog: [
-      { version: "0.0.0", date: "2026-11-01", zh: "占位，尚未发布。", en: "Placeholder, not released yet." }
+      { version: "1.0.0", date: "2026-11-01", zh: "首次发布。", en: "Initial release." }
     ]
   }
 ];
