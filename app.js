@@ -69,6 +69,7 @@
         tool.offline ? el("span", { class: "badge ok", text: lang === "zh" ? "离线运行" : "Offline" }) : null
       ]);
       var card = el("div", { class: "card" }, [
+        el("div", { class: "icon", text: tool.name[lang].charAt(0) }),
         el("h2", { text: tool.name[lang] }),
         el("p", { text: tool.summary[lang] }),
         badges,

@@ -27,14 +27,15 @@ window.TOOLS = [
       en: ["Download and double-click to run.", "Choose the PDF file(s) to compress.", "Pick a compression level and start.", "The compressed copy is saved next to the original; the original is never modified."]
     },
     file: "PDF-Compressor.exe",
-    version: "1.0.0",
-    updated: "2026-11-01",
-    size: "32.2 MB",
+    version: "1.0.1",
+    updated: "2026-11-02",
+    size: "29.6 MB",
     platform: "Windows 10/11",
     offline: true,
     downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/v1.0.0/PDF-Compressor.exe", mirror: "" },
-    sha256: "b544e80fc99947026b255d43297c8010a7fb0d9ccedb0f9e9c11328299a4648d",
+    sha256: "590e1128036f29b4ed29fbcce7cd1cc54d0daf81a372070b0229583eb0ec1969",
     changelog: [
+      { version: "1.0.1", date: "2026-11-02", zh: "压缩后变大时自动降低分辨率重试；黑白扫描件存成灰度图；新增“带文字层也压缩”选项；跳过的文件显示完整原因。", en: "Retries at lower resolution when the result would be larger; greyscale scans are stored as greyscale; new option to also compress PDFs with a text layer; skipped files now show the full reason." },
       { version: "1.0.0", date: "2026-11-01", zh: "首次发布。", en: "Initial release." }
     ]
   },
