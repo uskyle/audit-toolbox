@@ -47,22 +47,23 @@ window.TOOLS = [
       en: "Match bank statement lines against ledger records and list the differences."
     },
     intro: {
-      zh: "导入银行流水和账面明细，按金额、日期、对方户名等条件自动匹配，列出未达账项和疑似差异，减少手工逐笔核对的时间。结果仅供辅助，请自行复核。",
-      en: "Import a bank statement and ledger detail, auto-match by amount, date and counterparty, and list unmatched or suspicious items. Results are for assistance only; please review them yourself."
+      zh: "选择客户文件夹（序时账、余额表、银行流水），自动把流水对到各银行账户，做期初、借方、贷方、期末四项勾稽，逐笔匹配，并把“账面有流水无”“流水有账面无”的笔列为差异，一键导出底稿 Excel。流水中间缺行时会提示。结果仅供辅助，请自行复核。",
+      en: "Pick a client folder (ledger, trial balance and bank statements). The tool maps each statement to its bank account, ties out opening, debit, credit and closing balances, matches line by line, and lists items found only in the ledger or only in the statement as differences, with one-click Excel export. It warns when a statement has missing lines. Results are for assistance only; please review them yourself."
     },
     steps: {
-      zh: ["下载并双击运行。", "导入银行流水和账面明细（Excel / CSV）。", "设置匹配条件，点击核对。", "查看差异清单，可导出为 Excel。"],
-      en: ["Download and double-click to run.", "Import the bank statement and ledger detail (Excel / CSV).", "Set matching rules and run the check.", "Review the differences and export them to Excel."]
+      zh: ["下载并双击运行。", "选择客户文件夹（含序时账、余额表和银行流水，子文件夹名不限）。", "在下拉里选择银行账户，自动核对；流水对不上账户时，在“流水文件对应…”里手工指定。", "查看差异明细，点“生成底稿”导出为 Excel。"],
+      en: ["Download and double-click to run.", "Choose the client folder (ledger, trial balance and bank statements; sub-folder names don't matter).", "Pick a bank account from the list to run the check; if a statement is not mapped to an account, assign it by hand in “Statement mapping…”.", "Review the differences and click Export to save an Excel workpaper."]
     },
     file: "Bank-Statement-Checker.exe",
-    version: "1.0.0",
-    updated: "2026-11-01",
-    size: "36.4 MB",
+    version: "1.1.0",
+    updated: "2026-11-02",
+    size: "24.3 MB",
     platform: "Windows 10/11",
     offline: true,
-    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/Bank-check-v1.0.0/Bank-Statement-Checker.exe", mirror: "" },
-    sha256: "e3d6fa82684cb6941b4ee31b0001adb84c29447c075a7ba911de37121453abfe",
+    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/Bank-check-v1.1.0/Bank-Statement-Checker.exe", mirror: "" },
+    sha256: "0d3b1c0cc2e0b340925164336b66bfb6a8c5b25edce2b12c9fee8fdfe0909730",
     changelog: [
+      { version: "1.1.0", date: "2026-11-02", zh: "序时账列名识别不了时可手工映射，分级科目“银行存款\\户名”也能读；流水自动对应账户（账号、文件名、余额），对不上可手工指定；新增多家银行流水版式；差异清单列出账面有流水无/流水有账面无；流水缺行时提示；体积更小。", en: "Manual column mapping when the ledger can't be recognised; sub-account names like “Bank\\Account” are supported. Statements are auto-mapped to accounts (account number, file name, balance), with manual override. More bank statement layouts. A differences list shows ledger-only and statement-only items. Warns when a statement has missing lines. Smaller file size." },
       { version: "1.0.0", date: "2026-11-01", zh: "首次发布。", en: "Initial release." }
     ]
   }
