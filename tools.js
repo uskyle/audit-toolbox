@@ -32,7 +32,7 @@ window.TOOLS = [
     size: "29.6 MB",
     platform: "Windows 10/11",
     offline: true,
-    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/v1.0.0/PDF-Compressor.exe", mirror: "" },
+    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/v1.0.0/PDF-Compressor.exe", mirror: "https://gitee.com/midnight-sky/audit-toolbox/releases/download/v1.0.1/PDF-Compressor.exe" },
     sha256: "590e1128036f29b4ed29fbcce7cd1cc54d0daf81a372070b0229583eb0ec1969",
     changelog: [
       { version: "1.0.1", date: "2026-11-02", zh: "压缩后变大时自动降低分辨率重试；黑白扫描件存成灰度图；新增“带文字层也压缩”选项；跳过的文件显示完整原因。", en: "Retries at lower resolution when the result would be larger; greyscale scans are stored as greyscale; new option to also compress PDFs with a text layer; skipped files now show the full reason." },
