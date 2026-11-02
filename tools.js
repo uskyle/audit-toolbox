@@ -60,7 +60,7 @@ window.TOOLS = [
     size: "24.3 MB",
     platform: "Windows 10/11",
     offline: true,
-    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/Bank-check-v1.1.0/Bank-Statement-Checker.exe", mirror: "" },
+    downloads: { primary: "https://github.com/uskyle/audit-toolbox/releases/download/Bank-check-v1.1.0/Bank-Statement-Checker.exe", mirror: "https://gitee.com/midnight-sky/audit-toolbox/releases/download/Bank-check-v1.1.0/Bank-check.exe" },
     sha256: "0d3b1c0cc2e0b340925164336b66bfb6a8c5b25edce2b12c9fee8fdfe0909730",
     changelog: [
       { version: "1.1.0", date: "2026-11-02", zh: "序时账列名识别不了时可手工映射，分级科目“银行存款\\户名”也能读；流水自动对应账户（账号、文件名、余额），对不上可手工指定；新增多家银行流水版式；差异清单列出账面有流水无/流水有账面无；流水缺行时提示；体积更小。", en: "Manual column mapping when the ledger can't be recognised; sub-account names like “Bank\\Account” are supported. Statements are auto-mapped to accounts (account number, file name, balance), with manual override. More bank statement layouts. A differences list shows ledger-only and statement-only items. Warns when a statement has missing lines. Smaller file size." },
