@@ -1,0 +1,60 @@
+name: Build PDF-Compressor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "PDF-Compressor.py"
+      - ".github/workflows/build-pdf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller pypdfium2 Pillow
+
+      - name: Build exe
+        run: pyinstaller --onefile --windowed --name PDF-Compressor --collect-all pypdfium2 PDF-Compressor.py
+
+      - name: Check exe and compute SHA256
+        shell: pwsh
+        run: |
+          $exe = "dist\PDF-Compressor.exe"
+          if (-not (Test-Path $exe)) { throw "exe not found: $exe" }
+          $hash = (Get-FileHash $exe -Algorithm SHA256).Hash
+          $sizeMB = "{0:N1}" -f ((Get-Item $exe).Length / 1MB)
+          @"
+          直接压缩版：带文字层、签名版 PDF 也不再跳过，直接压成图片版 PDF。
+          注意：文字层和数字签名不会保留在压缩件里，原文件不会被修改或删除。
+
+          文件：PDF-Compressor.exe
+          大小：$sizeMB MB
+          SHA256：$hash
+          "@ | Out-File -Encoding utf8 release-notes.txt
+          echo "SHA256=$hash" >> $env:GITHUB_ENV
+          echo "SIZE_MB=$sizeMB" >> $env:GITHUB_ENV
+
+      - name: Publish Release v1.0.2
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.2
+          name: PDF-Compressor v1.0.2
+          body_path: release-notes.txt
+          files: dist/PDF-Compressor.exe
+          draft: false
+          prerelease: false
