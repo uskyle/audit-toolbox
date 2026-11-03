@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-"""PDF 压缩工具 —— 扫描件重采样 + JPEG 重编码；输出镜像原目录结构"""
+"""PDF 压缩工具 —— 扫描件重采样 + JPEG 重编码；输出镜像原目录结构
+直接压缩模式：带文字层、签名版 PDF 也直接压缩，不再跳过。
+注意：输出是重新生成的图片版 PDF，文字层和数字签名不会保留在压缩件里；
+压缩件是另存的新文件，原文件不会被修改或删除。"""
 import os
 import threading
 import tkinter as tk
@@ -18,19 +21,10 @@ PRESETS = {
 }
 
 
-def is_text_pdf(pdf, min_chars=120):
-    chars = 0
-    for i in range(len(pdf)):
-        chars += len(pdf[i].get_textpage().get_text_range().strip())
-        if chars >= min_chars:
-            return True
-    return False
-
-
-def compress_pdf(src, dst, dpi=200, quality=75, force_text=False):
+def compress_pdf(src, dst, dpi=200, quality=75):
+    # 直接压缩：不再因带文字层而跳过。输出为图片版 PDF，
+    # 文字层和数字签名不会保留在压缩件里，原文件不受影响。
     pdf = pdfium.PdfDocument(src)
-    if not force_text and is_text_pdf(pdf):
-        raise ValueError("带文字层的PDF（含OCR扫描件），压缩会丢失文字层，已跳过；如需压缩请勾选“带文字层也压缩”")
     if len(pdf) == 0:
         raise ValueError("空 PDF")
     os.makedirs(os.path.dirname(dst), exist_ok=True)
@@ -93,8 +87,6 @@ class App(tk.Tk):
         self.quality.pack(side="left")
         tk.Button(top, text="③ 开始压缩", font=FONT, command=self.start).pack(side="left", padx=12)
         tk.Button(top, text="移除选中", font=FONT, command=self.remove_selected).pack(side="left")
-        self.force_text = tk.BooleanVar(value=False)
-        tk.Checkbutton(top, text="带文字层也压缩", variable=self.force_text, font=FONT).pack(side="left", padx=8)
 
         mid = tk.Frame(self, padx=12)
         mid.pack(fill="x", pady=(0, 6))
@@ -114,7 +106,7 @@ class App(tk.Tk):
         self.bar.pack(fill="x", padx=12, pady=(8, 0))
         self.status = tk.Label(self, text="选择文件后开始", anchor="w", padx=12, pady=6, fg="#555", font=FONT)
         self.status.pack(fill="x", side="bottom")
-        tk.Label(self, text="说明：扫描件重采样为图片；文字版 PDF 自动跳过；原文件不会被修改或删除。",
+        tk.Label(self, text="说明：直接压缩，文字版、签名版 PDF 也会压成图片版；文字层和数字签名不会保留在压缩件里，原文件不会被修改或删除。",
                  anchor="w", padx=12, fg="#888", font=("Microsoft YaHei UI", 9)).pack(fill="x", side="bottom")
 
     # ---------- 选择 ----------
@@ -190,7 +182,7 @@ class App(tk.Tk):
         dpi, q = PRESETS[self.quality.get()]
         self.bar["maximum"] = len(self.files)
         self.bar["value"] = 0
-        threading.Thread(target=self._run, args=(dpi, q, self.force_text.get()), daemon=True).start()
+        threading.Thread(target=self._run, args=(dpi, q), daemon=True).start()
 
     def _dest(self, src):
         stem = os.path.basename(src)[:-4]
@@ -202,13 +194,13 @@ class App(tk.Tk):
             d = self.out_root
         return os.path.join(d, base)
 
-    def _run(self, dpi, q, force_text=False):
+    def _run(self, dpi, q):
         old_sum = new_sum = skipped = 0
         reasons = {}
         for i, f in enumerate(self.files):
             self.after(0, self.status.config, {"text": "正在压缩（%d/%d）：%s" % (i + 1, len(self.files), os.path.basename(f))})
             try:
-                old, new = compress_pdf(f, self._dest(f), dpi, q, force_text)
+                old, new = compress_pdf(f, self._dest(f), dpi, q)
                 old_sum += old
                 new_sum += new
                 self.after(0, self._row, i, new, new / old * 100)
