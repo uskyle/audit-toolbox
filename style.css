@@ -1,4 +1,4 @@
-/* 审计小工具箱 v2：参考 Obsidian 官网的克制风格——深色底、大标题、单一紫色强调色、大留白 */
+/* 审计小工具箱 v3：Amani 的 Obsidian 风设计——深色底、一屏大标题、单一紫色强调色、大留白 */
 :root {
   --bg: #0e0e11;
   --surface: #16161b;
@@ -15,7 +15,7 @@
   --warn-bg: rgba(230, 180, 60, .08);
   --warn-line: rgba(230, 180, 60, .35);
   --glow: rgba(139, 108, 246, .22);
-  --radius: 12px;
+  --radius: 16px;
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
@@ -71,35 +71,35 @@ nav a { color: var(--muted); padding: 6px 12px; border-radius: 8px; }
 nav a:hover { color: var(--text); background: var(--surface-hi); }
 nav a.lang { font-size: 12px; border: 1px solid var(--line-hi); color: var(--text); padding: 4px 10px; margin-left: 4px; }
 
-/* 首屏：居中大标题 + 柔和的紫色光晕 */
+/* 首屏：一屏只讲一件事——大标题 + 一句话 + 一个主按钮 */
 .hero {
-  position: relative; text-align: center; padding: 88px 0 56px; overflow: visible;
+  position: relative; text-align: center; padding: 120px 0 72px; overflow: visible;
 }
 .hero::before {
-  content: ""; position: absolute; inset: -40px 0 auto 0; height: 380px; z-index: -1;
+  content: ""; position: absolute; inset: -40px 0 auto 0; height: 420px; z-index: -1;
   background: radial-gradient(ellipse 60% 100% at 50% 0%, var(--glow), transparent 70%);
   pointer-events: none;
 }
 .hero h1 {
-  margin: 0 auto 18px; max-width: 760px;
-  font-size: clamp(32px, 6vw, 56px); line-height: 1.15; letter-spacing: -.02em; font-weight: 750;
+  margin: 0 auto 20px; max-width: 800px;
+  font-size: clamp(36px, 7vw, 64px); line-height: 1.15; letter-spacing: -.02em; font-weight: 750;
 }
-.hero p { margin: 0 auto; max-width: 560px; color: var(--muted); font-size: clamp(15px, 2vw, 18px); }
-.hero .btn-row { justify-content: center; margin: 32px 0 0; }
-.trust { display: flex; justify-content: center; gap: 10px 22px; flex-wrap: wrap; margin-top: 26px; color: var(--muted); font-size: 13px; }
+.hero p { margin: 0 auto; max-width: 580px; color: var(--muted); font-size: clamp(15px, 2vw, 18px); }
+.hero .btn-row { justify-content: center; margin: 36px 0 0; }
+.trust { display: flex; justify-content: center; gap: 10px 22px; flex-wrap: wrap; margin-top: 28px; color: var(--muted); font-size: 13px; }
 .trust span::before { content: "✓"; color: var(--ok); margin-right: 6px; font-weight: 700; }
 
 /* 工具卡片 */
 .section-title { margin: 8px 0 0; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; padding: 18px 0 72px; }
 .card {
-  position: relative; display: flex; flex-direction: column; gap: 12px; padding: 24px;
+  position: relative; display: flex; flex-direction: column; gap: 12px; padding: 28px;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   transition: border-color .2s, transform .2s, box-shadow .2s;
 }
 .card:hover { border-color: var(--line-hi); transform: translateY(-2px); box-shadow: 0 12px 32px -16px var(--glow); }
 .card .icon {
-  width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+  width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center;
   background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 18px;
 }
 .card h2 { margin: 0; font-size: 18px; font-weight: 650; }
@@ -115,7 +115,7 @@ nav a.lang { font-size: 12px; border: 1px solid var(--line-hi); color: var(--tex
 
 /* 按钮 */
 .btn {
-  display: inline-block; padding: 9px 22px; border-radius: 10px; font-size: 15px; font-weight: 600;
+  display: inline-block; padding: 11px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
   background: var(--accent); color: var(--accent-text); border: 1px solid var(--accent);
   cursor: pointer; text-align: center; transition: background .15s, transform .15s;
 }
@@ -124,6 +124,23 @@ nav a.lang { font-size: 12px; border: 1px solid var(--line-hi); color: var(--tex
 .btn.secondary:hover { background: var(--surface-hi); border-color: var(--line-hi); color: var(--text); }
 .btn.disabled { background: var(--surface); color: var(--muted); border-color: var(--line); cursor: not-allowed; pointer-events: none; }
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0; }
+
+/* 新增：三个理由 + 三步用法 + 结尾行动区（只改版式，不改工具数据和下载逻辑） */
+.section-head { padding: 24px 0 8px; max-width: 680px; }
+.section-head h2 { margin: 0 0 10px; font-size: clamp(24px, 4vw, 32px); line-height: 1.25; letter-spacing: -.01em; font-weight: 700; }
+.section-head p { margin: 0; color: var(--muted); }
+.values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 24px 0 72px; }
+.value { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.value h3 { margin: 0 0 8px; font-size: 17px; font-weight: 650; }
+.value p { margin: 0; color: var(--muted); font-size: 14px; }
+.how { padding: 0 0 72px; }
+.how ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 24px 0 0; margin: 0; list-style: none; counter-reset: s; }
+.how ol li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; color: var(--muted); font-size: 14px; }
+.how ol li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 13px; margin-bottom: 12px; }
+.how ol li strong { display: block; color: var(--text); font-size: 16px; margin-bottom: 4px; }
+.cta { text-align: center; background: var(--accent-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 48px 24px; margin: 0 0 72px; }
+.cta h2 { margin: 0 0 10px; font-size: clamp(24px, 4vw, 32px); line-height: 1.25; font-weight: 700; }
+.cta p { margin: 0 auto 24px; max-width: 520px; color: var(--muted); }
 
 /* 详情页 */
 .detail { padding: 40px 0 72px; max-width: 760px; margin: 0 auto; }
@@ -151,7 +168,8 @@ pre {
 }
 ul { padding-left: 22px; margin: 8px 0; }
 li { margin: 4px 0; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+overflow: hidden; }
 th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
 tr:last-child td { border-bottom: 0; }
 th { color: var(--muted); font-weight: 600; white-space: nowrap; background: var(--surface-hi); }
@@ -166,7 +184,9 @@ footer p { margin: 4px 0; }
 .empty { color: var(--muted); padding: 40px 0; text-align: center; }
 
 @media (max-width: 560px) {
-  .hero { padding: 56px 0 36px; }
+  .hero { padding: 72px 0 48px; }
   .grid { grid-template-columns: 1fr; }
+  .values { grid-template-columns: 1fr; }
+  .how ol { grid-template-columns: 1fr; }
   nav a { padding: 6px 8px; }
 }
