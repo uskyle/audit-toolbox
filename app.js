@@ -116,6 +116,11 @@
       }
       detailBox.appendChild(row);
 
+      // 备用线路版本标注（例如备用线路仍为旧版时提示）
+      if (tool.downloads.mirror && tool.mirrorNote && tool.mirrorNote[lang]) {
+        detailBox.appendChild(el("p", { style: "color:#888;font-size:14px;margin-top:8px", text: tool.mirrorNote[lang] }));
+      }
+
       // 使用步骤
       detailBox.appendChild(el("h2", { text: T.steps }));
       var ol = el("ol");
